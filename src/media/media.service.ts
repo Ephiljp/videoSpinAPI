@@ -66,7 +66,7 @@ export class MediaService {
           }
         }
 
-     /*    if (fileConfig && fileConfig.frame) {
+        /*    if (fileConfig && fileConfig.frame) {
           console.log(fileConfig.frame);
           if (fs.existsSync(`tmp/${fileConfig.frame}.png`)) {
             frameConfig = fileConfig.frame;
@@ -228,7 +228,7 @@ export class MediaService {
         if (audioConfig && !frameConfig) {
           command.outputOptions(['-map 1:0', '-shortest']);
         }
-        
+
         if (audioConfig && frameConfig) {
           command.outputOptions(['-map 2:0', '-shortest']);
         }
@@ -238,7 +238,6 @@ export class MediaService {
           .on('end', () => {
             this.createThumb(file, fileName);
 
-         
             this.moveFile(file, 'tmp1');
             //return res.status(201).json('OK');
           })
@@ -272,7 +271,6 @@ export class MediaService {
       //res.status(201).json('success!!');
     }
   }
-
 
   createThumb(path, fileName) {
     var command1 = ffmpeg();

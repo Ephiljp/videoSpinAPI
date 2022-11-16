@@ -27,6 +27,7 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "bull": "^4.10.1",
+    "dotenv": "^16.0.3",
     "fluent-ffmpeg": "^2.1.2",
     "ioredis": "^5.2.4",
     "node-base64-image": "^2.0.4",
