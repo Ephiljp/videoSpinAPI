@@ -2,7 +2,14 @@
 https://docs.nestjs.com/controllers#controllers
 */
 
-import { Controller, Post, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Req,
+  Res,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { MediaService } from './media.service';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -29,9 +36,13 @@ export class MediaController {
     }),
   )
   async create(@UploadedFile() file, @Req() request, @Res() response) {
-
     try {
-      await this.mediaService.fileUpload(request, response);
+    
+      console.log(request.body.evento);
+
+  
+
+      await this.mediaService.fileUpload(request, response,file);
     } catch (error) {
       return response
         .status(500)
