@@ -52,9 +52,12 @@ export class MediaService {
         let fileConfig;
         let audioConfig = '';
         let frameConfig = '';
-        fileConfig = await JSON.parse(
-          fs.readFileSync(`tmp/${fileName}.txt`, 'utf8'),
-        );
+        setTimeout(() => {
+          fileConfig =  JSON.parse(
+            fs.readFileSync(`tmp/${fileName}.txt`, 'utf8'),
+          );
+        }, 200);
+     
 
         console.log(fileConfig);
 
@@ -79,8 +82,10 @@ export class MediaService {
         command.input(`tmp/${file}`).format('mp4');
 
         if (frameConfig) {
-          command.input(`tmp/${frameConfig}.png`);
+      
         }
+
+        //command.input(`tmp/back1.png`);
 
         if (audioConfig) {
           command.input(`tmp/${audioConfig}.mp3`);
@@ -221,6 +226,12 @@ export class MediaService {
               inputs: ['scaled'],
               outputs: 'output1',
             },
+      /*       {
+              filter: 'overlay',
+              options: { x: '0', y: '0' },
+              inputs: ['output1'],
+              outputs: ['output2'],
+            }, */
           ],
           'output1',
         );
