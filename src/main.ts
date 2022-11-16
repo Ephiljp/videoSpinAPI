@@ -11,14 +11,14 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       '*.*',
-      'http://localhost:8100',
-      'http://localhost:4200',
-      'https://192.168.1.104:4200',
-      'http://192.168.1.104:4200',
-      'https://192.168.1.104:8100',
+      'http://192.168.31.199:8100',
+      'http://192.168.31.199:4200',
+      'https://192.168.31.199:4200',
+      'http://192.168.31.199:4200',
+      'https://192.168.31.199:8100',
     ],
   });
-  await app.listen(3000, '192.168.1.104').then(() => {
+  await app.listen(3000, '192.168.31.199').then(() => {
     console.log('aplication started');
   });
 }
