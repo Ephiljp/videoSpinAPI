@@ -15,7 +15,8 @@ const supportedFiles = ['mp4', 'mov', 'm4v'];
  class videoConsumer {  
   @Process('video-job')
   async videoTransformeJob(job: Job<any>) {
-    console.log(job)
+    
+    //console.log(job)
     const {req} = job.data;
 
 
