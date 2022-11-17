@@ -52,9 +52,15 @@ export class MediaService {
         let fileConfig;
         let audioConfig = '';
         let frameConfig = '';
-        fileConfig = await JSON.parse(
-          fs.readFileSync(`tmp/${fileName}.txt`, 'utf8'),
-        );
+
+     
+    
+
+        if (fs.existsSync(`tmp/${fileName}.txt`)) {
+          fileConfig = await JSON.parse(
+            fs.readFileSync(`tmp/${fileName}.txt`, 'utf8'),
+          );
+        }
 
         console.log(fileConfig);
 
