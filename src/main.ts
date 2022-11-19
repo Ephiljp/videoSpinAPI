@@ -16,7 +16,8 @@ async function bootstrap() {
       'https://192.168.31.199:4200',
       'http://192.168.31.199:4200',
       'https://192.168.31.199:8100',
-      'https://192.168.1.104' 
+      'https://192.168.1.104' ,
+      'http://localhost:8100'
     ],
   });
   await app.listen(3000, '192.168.1.104').then(() => {

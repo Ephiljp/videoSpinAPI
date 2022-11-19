@@ -52,9 +52,7 @@ export class MediaService {
         let fileConfig;
         let audioConfig = '';
         let frameConfig = '';
-
-     
-    
+        let folder = '';
 
         if (fs.existsSync(`tmp/${fileName}.txt`)) {
           fileConfig = await JSON.parse(
@@ -62,6 +60,21 @@ export class MediaService {
           );
         }
 
+        if (fileConfig) {
+          if (fs.existsSync(`dist/${fileConfig.name}`)) {
+            folder = `dist/${fileConfig.name}`
+     
+          }else{
+           await fs.promises.mkdir(`dist/${fileConfig.name}`).then((e)=>{
+            console.log('Criou a pasta')
+            folder = `dist/${fileConfig.name}`
+           })
+          }
+        }else[
+          folder = `dist/media`
+        ]
+
+        console.log('fodler: '+folder)
         console.log(fileConfig);
 
         if (fileConfig && fileConfig.audio) {
@@ -96,19 +109,25 @@ export class MediaService {
           [
             {
               filter: 'trim',
-              options: { start: '0', duration: '3' },
+              options: { start: '0', duration: fileConfig.vNormal },
               inputs: '0:v',
               outputs: ['t0'],
             },
             {
               filter: 'trim',
-              options: { start: '3', duration: '3' },
+              options: {
+                start: fileConfig.vNormal,
+                duration: fileConfig.vSlow,
+              },
               inputs: '0',
               outputs: ['t1'],
             },
             {
               filter: 'trim',
-              options: { start: '6', duration: '4' },
+              options: {
+                start: fileConfig.vNormal + fileConfig.vSlow,
+                duration: fileConfig.vFast,
+              },
               inputs: '0',
               outputs: ['t2'],
             },
@@ -146,19 +165,25 @@ export class MediaService {
             },
             {
               filter: 'trim',
-              options: { start: '0', duration: '3' },
-              inputs: '0',
+              options: { start: '0', duration: fileConfig.vNormal },
+              inputs: '0:v',
               outputs: ['t0'],
             },
             {
               filter: 'trim',
-              options: { start: '3', duration: '3' },
+              options: {
+                start: fileConfig.vNormal,
+                duration: fileConfig.vSlow,
+              },
               inputs: '0',
               outputs: ['t1'],
             },
             {
               filter: 'trim',
-              options: { start: '6', duration: '4' },
+              options: {
+                start: fileConfig.vNormal + fileConfig.vSlow,
+                duration: fileConfig.vFast,
+              },
               inputs: '0',
               outputs: ['t2'],
             },
@@ -240,9 +265,9 @@ export class MediaService {
         }
 
         command
-          .save(`dist/media/${fileName}_1.mp4`)
+          .save(`${folder}/${fileName}_1.mp4`)
           .on('end', () => {
-            this.createThumb(file, fileName);
+            this.createThumb(folder, fileName);
 
             this.moveFile(file, 'tmp1');
             //return res.status(201).json('OK');
@@ -278,13 +303,13 @@ export class MediaService {
     }
   }
 
-  createThumb(path, fileName) {
+  createThumb(folder, fileName) {
     var command1 = ffmpeg();
-    command1.input(`dist/media/${fileName}_1.mp4`);
+    command1.input(`${folder}/${fileName}_1.mp4`);
     command1.screenshots({
       timestamps: ['1'],
       filename: `${fileName}_1.jpg`,
-      folder: 'dist/media',
+      folder: folder,
     });
   }
 
