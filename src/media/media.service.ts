@@ -96,19 +96,19 @@ export class MediaService {
           [
             {
               filter: 'trim',
-              options: { start: '0', duration: '5' },
+              options: { start: '0', duration: '3' },
               inputs: '0:v',
               outputs: ['t0'],
             },
             {
               filter: 'trim',
-              options: { start: '5', duration: '5' },
+              options: { start: '3', duration: '3' },
               inputs: '0',
               outputs: ['t1'],
             },
             {
               filter: 'trim',
-              options: { start: '10', duration: '5' },
+              options: { start: '6', duration: '4' },
               inputs: '0',
               outputs: ['t2'],
             },
@@ -146,19 +146,19 @@ export class MediaService {
             },
             {
               filter: 'trim',
-              options: { start: '0', duration: '5' },
+              options: { start: '0', duration: '3' },
               inputs: '0',
               outputs: ['t0'],
             },
             {
               filter: 'trim',
-              options: { start: '5', duration: '5' },
+              options: { start: '3', duration: '3' },
               inputs: '0',
               outputs: ['t1'],
             },
             {
               filter: 'trim',
-              options: { start: '10', duration: '5' },
+              options: { start: '6', duration: '4' },
               inputs: '0',
               outputs: ['t2'],
             },
