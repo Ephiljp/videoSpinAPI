@@ -18,7 +18,7 @@ async function bootstrap() {
       'https://192.168.31.199:8100'
     ],
   });
-  await app.listen(3000, '192.168.1.104').then(() => {
+  await app.listen(3000, '192.168.31.199').then(() => {
     console.log('aplication started');
   });
 }
