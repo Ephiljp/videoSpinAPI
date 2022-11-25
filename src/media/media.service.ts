@@ -20,10 +20,10 @@ import { encode, decode } from 'node-base64-image';
 @Injectable()
 export class MediaService {
   files = [];
-
+  interval:any;
   canEdit = true;
   constructor() {
-    setInterval(() => {
+  this.interval =  setInterval(() => {
       const dirCont = fs.readdirSync('tmp');
       this.files = dirCont.filter((file) =>
         file.match(new RegExp(`.*\.(mp4)`, 'ig')),
@@ -47,24 +47,45 @@ export class MediaService {
   async converMedia(file) {
     if (supportedFiles.includes(this.getFileExtension(file))) {
       this.canEdit = false;
+      
       try {
         let fileName = this.getFileNameWithoutExtension(file);
         let fileConfig;
         let audioConfig = '';
         let frameConfig = '';
-        setTimeout(() => {
+/*         setTimeout(() => {
           fileConfig =  JSON.parse(
             fs.readFileSync(`tmp/${fileName}.txt`, 'utf8'),
           );
-        }, 200);
+        }, 200); */
      
         let folder = '';
-
-        if (fs.existsSync(`tmp/${fileName}.txt`)) {
+        try {
           fileConfig = await JSON.parse(
             fs.readFileSync(`tmp/${fileName}.txt`, 'utf8'),
           );
+        } catch (error) {
+          fs.rename(`tmp/${file}`, `tmp1/err_${file}`, (err) => console.log(err));
+          this.interval.clear();
+
+          this.interval =  setInterval(() => {
+            const dirCont = fs.readdirSync('tmp');
+            this.files = dirCont.filter((file) =>
+              file.match(new RegExp(`.*\.(mp4)`, 'ig')),
+            );
+      
+            if (this.files.length > 0) {
+              if (this.canEdit) {
+                console.log(this.files);
+                this.converMedia(this.files[0]);
+              }
+            }
+          }, 2000);
+
+          return
         }
+  
+      
 
         if (fileConfig) {
           if (fs.existsSync(`dist/${fileConfig.name}`)) {
