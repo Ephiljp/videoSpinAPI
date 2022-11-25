@@ -167,7 +167,7 @@ export class MediaService {
 
             {
               filter: 'setpts',
-              options: '2*PTS',
+              options: '1.5*PTS',
               inputs: 't2N',
               outputs: ['t2S'],
             },
@@ -223,7 +223,7 @@ export class MediaService {
 
             {
               filter: 'setpts',
-              options: '2*PTS',
+              options: '1.5*PTS',
               inputs: 't2N',
               outputs: ['t2S'],
             },
