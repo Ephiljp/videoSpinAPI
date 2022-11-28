@@ -20,6 +20,7 @@ import { encode, decode } from 'node-base64-image';
 @Injectable()
 export class MediaService {
   files = [];
+  fileTxt = [];
   interval:any;
   canEdit = true;
   constructor() {
@@ -29,7 +30,11 @@ export class MediaService {
         file.match(new RegExp(`.*\.(mp4)`, 'ig')),
       );
 
-      if (this.files.length > 0) {
+      this.fileTxt = dirCont.filter((file) =>
+      file.match(new RegExp(`.*\.(txt)`, 'ig')),
+    );
+
+      if (this.files.length > 0 && this.fileTxt.length > 0 ) {
         if (this.canEdit) {
           console.log(this.files);
           this.converMedia(this.files[0]);
@@ -61,9 +66,11 @@ export class MediaService {
      
         let folder = '';
         try {
-          fileConfig = await JSON.parse(
+
+          fileConfig =  JSON.parse(
             fs.readFileSync(`tmp/${fileName}.txt`, 'utf8'),
           );
+       
         } catch (error) {
           fs.rename(`tmp/${file}`, `tmp1/err_${file}`, (err) => console.log(err));
           this.interval.clear();
