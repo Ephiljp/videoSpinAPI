@@ -1,3 +1,4 @@
+import { ArduinoModule } from './arduino/arduino.module';
 import { MediaModule } from './media/media.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
@@ -7,6 +8,7 @@ import { videoConsumer } from './media/media-consumer';
 
 @Module({
   imports: [
+    ArduinoModule,
     MediaModule,
     BullModule.forRoot({
       redis: {

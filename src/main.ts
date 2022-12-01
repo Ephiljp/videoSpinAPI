@@ -22,7 +22,9 @@ async function bootstrap() {
       `http://${process.env.SERVIDOR_IP}:4200`,
       `https://${process.env.SERVIDOR_IP}:8100`,
       `https://${process.env.SERVIDOR_IP}:4200`,
-      `http://localhost:4200`
+      `https://${process.env.SERVIDOR_IP}`,
+      `https://${process.env.SERVIDOR_IP}:443`,
+      `http://localhost:4200`,
     ],
   });
   await app.listen(3000, process.env.SERVIDOR_IP).then(() => {
